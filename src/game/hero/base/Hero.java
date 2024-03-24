@@ -1,11 +1,17 @@
 package game.hero.base;
 
+
+
+import game.hero.coordinate.CoordinateImpl;
+
 import java.util.Random;
 
-public class Hero {
+public abstract class Hero  {
     protected static int number;
     protected static Random r;
 
+    protected String team;
+    protected CoordinateImpl coordinate;
     protected String name;
     protected int hp;
     protected int maxHp;
@@ -18,6 +24,21 @@ public class Hero {
     protected int dexterity;
     protected int maxDexterity;
 
+    public CoordinateImpl getCoordinate() {
+        return coordinate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setCoordinate(CoordinateImpl coordinate) {
+        this.coordinate = coordinate;
+    }
 
     static {
         Hero.number = 0;
@@ -32,7 +53,10 @@ public class Hero {
                 int speed,
                 int maxSpeed,
                 int dexterity,
-                int maxDexterity
+                int maxDexterity,
+                CoordinateImpl coordinate,
+                String team
+
     ) {
         this.name = name;
         this.hp = hp;
@@ -45,20 +69,9 @@ public class Hero {
         this.maxSpeed = maxSpeed;
         this.dexterity = dexterity;
         this.maxDexterity = maxDexterity;
+        this.coordinate =coordinate;
+        this.team = team;
 
-    }
-
-    public Hero() {
-        this(String.format("Hero_Base #%d", ++Hero.number),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300)
-        );
     }
 
 
