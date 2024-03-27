@@ -1,12 +1,10 @@
 package game.hero.base;
 
-
-
 import game.hero.coordinate.CoordinateImpl;
 
 import java.util.Random;
 
-public abstract class Hero  {
+public abstract class Hero implements Actions {
     protected static int number;
     protected static Random r;
 
@@ -23,6 +21,7 @@ public abstract class Hero  {
     protected int maxSpeed;
     protected int dexterity;
     protected int maxDexterity;
+    protected int initiative;
 
     public CoordinateImpl getCoordinate() {
         return coordinate;
@@ -36,6 +35,10 @@ public abstract class Hero  {
         return team;
     }
 
+    public String getInitiative() {
+        return team;
+    }
+
     public void setCoordinate(CoordinateImpl coordinate) {
         this.coordinate = coordinate;
     }
@@ -44,6 +47,8 @@ public abstract class Hero  {
         Hero.number = 0;
         Hero.r = new Random();
     }
+
+    public Hero(){};
 
     public Hero(String name,
                 int hp,
@@ -55,7 +60,8 @@ public abstract class Hero  {
                 int dexterity,
                 int maxDexterity,
                 CoordinateImpl coordinate,
-                String team
+                String team,
+                int initiative
 
     ) {
         this.name = name;
@@ -71,6 +77,7 @@ public abstract class Hero  {
         this.maxDexterity = maxDexterity;
         this.coordinate =coordinate;
         this.team = team;
+        this.initiative = initiative;
 
     }
 
@@ -85,7 +92,8 @@ public abstract class Hero  {
     }
 
     public void restorationOfProtection(int Protection) {
-        this.protection = Protection + this.protection > this.maxProtection ? this.maxProtection : Protection + this.protection;
+        this.protection = Protection + this.protection > this.maxProtection
+                ? this.maxProtection : Protection + this.protection;
     }
 
     public void getDamage(int damageHp, int damageProtection) {
