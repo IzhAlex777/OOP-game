@@ -10,6 +10,7 @@ public abstract class Hero implements Actions {
 
     protected String team;
     protected CoordinateImpl coordinate;
+    protected int coordinateSum;
     protected String name;
     protected int hp;
     protected int maxHp;
@@ -22,6 +23,8 @@ public abstract class Hero implements Actions {
     protected int dexterity;
     protected int maxDexterity;
     protected int initiative;
+
+
 
     public CoordinateImpl getCoordinate() {
         return coordinate;
@@ -37,6 +40,18 @@ public abstract class Hero implements Actions {
 
     public String getInitiative() {
         return team;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getCoordinateSum() {
+        return coordinateSum;
+    }
+
+    public void setCoordinateSum(int coordinateSum) {
+        this.coordinateSum = coordinateSum;
     }
 
     public void setCoordinate(CoordinateImpl coordinate) {
@@ -112,20 +127,20 @@ public abstract class Hero implements Actions {
         target.getDamage(damageHp, damageProtection);
     }
 
-    @Override
-    public String toString() {
-        return "Hero{" +
-                "name='" + name + '\'' +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", force=" + force +
-                ", forceHp=" + forceHp +
-                ", protection=" + protection +
-                ", maxProtection=" + maxProtection +
-                ", speed=" + speed +
-                ", maxSpeed=" + maxSpeed +
-                ", dexterity=" + dexterity +
-                ", maxDexterity=" + maxDexterity +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Hero{" +
+//                "name='" + name + '\'' +
+//                ", hp=" + hp +
+//                ", maxHp=" + maxHp +
+//                ", force=" + force +
+//                ", forceHp=" + forceHp +
+//                ", protection=" + protection +
+//                ", maxProtection=" + maxProtection +
+//                ", speed=" + speed +
+//                ", maxSpeed=" + maxSpeed +
+//                ", dexterity=" + dexterity +
+//                ", maxDexterity=" + maxDexterity +
+//                '}';
+//    }
 }

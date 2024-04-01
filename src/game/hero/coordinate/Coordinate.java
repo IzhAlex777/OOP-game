@@ -1,5 +1,6 @@
 package game.hero.coordinate;
 
+
 import game.hero.base.Hero;
 
 import java.util.List;

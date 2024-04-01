@@ -1,5 +1,6 @@
 package game.hero;
 
+
 import game.hero.base.Hero;
 import game.hero.coordinate.CoordinateImpl;
 

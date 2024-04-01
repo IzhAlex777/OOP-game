@@ -1,20 +1,19 @@
 package game.hero;
 
+
 import game.hero.base.Hero;
-import game.hero.coordinate.Coordinate;
 import game.hero.coordinate.CoordinateImpl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Sniper extends Hero implements Coordinate {
+public class Sniper extends Hero {
 
     private int accuracy;
     private int maxAccuracy;
     private int arrows;
-    private Hero sniper = null;
-    private Map<String, List<Hero>> mapTeam = new HashMap();
+    private Hero sniper;// = null;
+    private Map<String, List<Hero>> mapTeam;// = new HashMap();
 
     public Sniper (String name, int x, int y, String team, int  arrows, int initiative){
         super(name,
@@ -35,8 +34,7 @@ public class Sniper extends Hero implements Coordinate {
         this.arrows = arrows;
     }
 
-    @Override
-    public List<Hero> distanceToEnemy(Hero hero, Map<String, List<Hero>> mapTeam) {
+    public List<Hero> distanceToEnemySniper(Hero hero, Map<String, List<Hero>> mapTeam) {
         sniper = hero;
         this.mapTeam = mapTeam;
         return coordinate.distanceToEnemy(hero, mapTeam);
@@ -45,7 +43,7 @@ public class Sniper extends Hero implements Coordinate {
     @Override
     public void step() {
         if (this.arrows != 0){
-            List<Hero> heroes = distanceToEnemy(sniper, mapTeam);
+            List<Hero> heroes = distanceToEnemySniper(sniper, mapTeam);
             if(!heroes.isEmpty()){
                 for (Hero e: heroes) {
                     if (e.getTeam().equals("1")) {

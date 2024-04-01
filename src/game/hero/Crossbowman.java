@@ -1,22 +1,20 @@
 package game.hero;
 
 import game.hero.base.Hero;
-import game.hero.coordinate.Coordinate;
 import game.hero.coordinate.CoordinateImpl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Crossbowman extends Hero implements Coordinate {
+public class Crossbowman extends Hero {
 
     private int accuracy;
     private int maxAccuracy;
     private int armorPenetration;
     private int maxArmorPenetration;
     private int arrows;
-    private Hero crossbowman = null;
-    private Map<String, List<Hero>> mapTeam = new HashMap();
+    private Hero crossbowman;// = null;
+    private Map<String, List<Hero>> mapTeam;// = new HashMap();
 
     public Crossbowman (String name, int x, int y, String team, int  arrows, int initiative){
 
@@ -40,8 +38,7 @@ public class Crossbowman extends Hero implements Coordinate {
         this.arrows = arrows;
     }
 
-    @Override
-    public List<Hero> distanceToEnemy(Hero hero, Map<String, List<Hero>> mapTeam) {
+    public List<Hero> distanceToEnemyCrossbowman(Hero hero, Map<String, List<Hero>> mapTeam) {
         crossbowman = hero;
         this.mapTeam = mapTeam;
         return coordinate.distanceToEnemy(hero, mapTeam);
@@ -50,7 +47,7 @@ public class Crossbowman extends Hero implements Coordinate {
     @Override
     public void step() {
         if (this.arrows != 0){
-            List<Hero> heroes = distanceToEnemy(crossbowman, mapTeam);
+            List<Hero> heroes = distanceToEnemyCrossbowman(crossbowman, mapTeam);
             if(!heroes.isEmpty()){
                 for (Hero e: heroes) {
                     if (e.getTeam().equals("2")) {
