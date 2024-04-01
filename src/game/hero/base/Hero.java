@@ -1,11 +1,16 @@
 package game.hero.base;
 
+import game.hero.coordinate.CoordinateImpl;
+
 import java.util.Random;
 
-public class Hero {
+public abstract class Hero implements Actions {
     protected static int number;
     protected static Random r;
 
+    protected String team;
+    protected CoordinateImpl coordinate;
+    protected int coordinateSum;
     protected String name;
     protected int hp;
     protected int maxHp;
@@ -17,12 +22,48 @@ public class Hero {
     protected int maxSpeed;
     protected int dexterity;
     protected int maxDexterity;
+    protected int initiative;
 
+
+
+    public CoordinateImpl getCoordinate() {
+        return coordinate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public String getInitiative() {
+        return team;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getCoordinateSum() {
+        return coordinateSum;
+    }
+
+    public void setCoordinateSum(int coordinateSum) {
+        this.coordinateSum = coordinateSum;
+    }
+
+    public void setCoordinate(CoordinateImpl coordinate) {
+        this.coordinate = coordinate;
+    }
 
     static {
         Hero.number = 0;
         Hero.r = new Random();
     }
+
+    public Hero(){};
 
     public Hero(String name,
                 int hp,
@@ -32,7 +73,11 @@ public class Hero {
                 int speed,
                 int maxSpeed,
                 int dexterity,
-                int maxDexterity
+                int maxDexterity,
+                CoordinateImpl coordinate,
+                String team,
+                int initiative
+
     ) {
         this.name = name;
         this.hp = hp;
@@ -45,20 +90,10 @@ public class Hero {
         this.maxSpeed = maxSpeed;
         this.dexterity = dexterity;
         this.maxDexterity = maxDexterity;
+        this.coordinate =coordinate;
+        this.team = team;
+        this.initiative = initiative;
 
-    }
-
-    public Hero() {
-        this(String.format("Hero_Base #%d", ++Hero.number),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300),
-                Hero.r.nextInt(100, 200),
-                Hero.r.nextInt(100, 300)
-        );
     }
 
 
@@ -72,7 +107,8 @@ public class Hero {
     }
 
     public void restorationOfProtection(int Protection) {
-        this.protection = Protection + this.protection > this.maxProtection ? this.maxProtection : Protection + this.protection;
+        this.protection = Protection + this.protection > this.maxProtection
+                ? this.maxProtection : Protection + this.protection;
     }
 
     public void getDamage(int damageHp, int damageProtection) {
@@ -91,20 +127,20 @@ public class Hero {
         target.getDamage(damageHp, damageProtection);
     }
 
-    @Override
-    public String toString() {
-        return "Hero{" +
-                "name='" + name + '\'' +
-                ", hp=" + hp +
-                ", maxHp=" + maxHp +
-                ", force=" + force +
-                ", forceHp=" + forceHp +
-                ", protection=" + protection +
-                ", maxProtection=" + maxProtection +
-                ", speed=" + speed +
-                ", maxSpeed=" + maxSpeed +
-                ", dexterity=" + dexterity +
-                ", maxDexterity=" + maxDexterity +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Hero{" +
+//                "name='" + name + '\'' +
+//                ", hp=" + hp +
+//                ", maxHp=" + maxHp +
+//                ", force=" + force +
+//                ", forceHp=" + forceHp +
+//                ", protection=" + protection +
+//                ", maxProtection=" + maxProtection +
+//                ", speed=" + speed +
+//                ", maxSpeed=" + maxSpeed +
+//                ", dexterity=" + dexterity +
+//                ", maxDexterity=" + maxDexterity +
+//                '}';
+//    }
 }

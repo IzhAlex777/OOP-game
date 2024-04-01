@@ -2,13 +2,21 @@ package game.hero;
 
 
 import game.hero.base.Hero;
+import game.hero.coordinate.CoordinateImpl;
+
+import java.util.List;
+import java.util.Map;
 
 public class Sniper extends Hero {
+
     private int accuracy;
     private int maxAccuracy;
+    private int arrows;
+    private Hero sniper;// = null;
+    private Map<String, List<Hero>> mapTeam;// = new HashMap();
 
-    public Sniper (){
-        super(String.format("Hero_Sniper #%d", ++Sniper.number),
+    public Sniper (String name, int x, int y, String team, int  arrows, int initiative){
+        super(name,
                 Sniper.r.nextInt(200, 300),
                 Sniper.r.nextInt(100, 200),
                 Sniper.r.nextInt(200, 300),
@@ -16,14 +24,52 @@ public class Sniper extends Hero {
                 Sniper.r.nextInt(200, 300),
                 Sniper.r.nextInt(100, 200),
                 Sniper.r.nextInt(200, 300),
-                Sniper.r.nextInt(100, 200)
+                Sniper.r.nextInt(100, 200),
+                new CoordinateImpl(x,y),
+                team,
+                initiative
         );
-        this.maxAccuracy = Sniper.r.nextInt(30, 80);
+        this.maxAccuracy = Spearman.r.nextInt(30, 80);
         this.accuracy = maxAccuracy;
+        this.arrows = arrows;
+    }
+
+    public List<Hero> distanceToEnemySniper(Hero hero, Map<String, List<Hero>> mapTeam) {
+        sniper = hero;
+        this.mapTeam = mapTeam;
+        return coordinate.distanceToEnemy(hero, mapTeam);
+    }
+
+    @Override
+    public void step() {
+        if (this.arrows != 0){
+            List<Hero> heroes = distanceToEnemySniper(sniper, mapTeam);
+            if(!heroes.isEmpty()){
+                for (Hero e: heroes) {
+                    if (e.getTeam().equals("1")) {
+                        arrows--;
+                        sniper.attack(e);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public String toString() {
-        return "Hero : Sniper " ;
+        return "{Hero = Sniper" +
+                ", name='" + name + '\'' +
+                ", team='" + team + '\'' +
+                ", initiative=" + initiative +
+                ", hp=" + hp +
+                ", maxHp=" + maxHp +
+                ", protection=" + protection +
+                ", maxProtection=" + maxProtection +
+                ", accuracy=" + accuracy +
+                ", maxAccuracy=" + maxAccuracy +
+                ", arrows=" + arrows +
+                ", coordinate=" + coordinate +
+                '}';
     }
 }
